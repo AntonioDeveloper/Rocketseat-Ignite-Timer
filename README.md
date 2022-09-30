@@ -10,6 +10,6 @@ Projeto desenvolvido durante o curso de React + Typescript da Rocketseat.
 - Typescript
 - ES LInt
 
-![Countdown Screen](https://github.com/AntonioDeveloper/Rocketseat-Ignite-Timer/tree/main/src/assets/countdown.png)
+![Countdown Screen](https://raw.githubusercontent.com/AntonioDeveloper/Rocketseat-Ignite-Timer/main/src/assets/countdown.png)
 
-![History Screen](https://github.com/AntonioDeveloper/Rocketseat-Ignite-Timer/tree/main/src/assets/historico.png)
+![History Screen](https://github.com/AntonioDeveloper/Rocketseat-Ignite-Timer/blob/main/src/assets/historico.png?raw=true)
