@@ -11,6 +11,7 @@ import {
   markCurrentCycleAsFinishedAction,
   interruptCurrentCycleAction,
 } from '../cycles/actions'
+import { differenceInSeconds } from 'date-fns'
 
 interface CreateCycleData {
   task: string
@@ -44,7 +45,7 @@ export function CyclesContextProvider({
     },
     () => {
       const storedStateAsJson = localStorage.getItem(
-        '@ignite-timr:cycles-state-1.0.0',
+        '@ignite-timer:cycles-state-1.0.0',
       )
       if (storedStateAsJson) {
         return JSON.parse(storedStateAsJson)
@@ -56,17 +57,23 @@ export function CyclesContextProvider({
     },
   )
 
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
+  const { cycles, activeCycleId } = cyclesState
+
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+    if (activeCycle) {
+      return differenceInSeconds(new Date(), new Date(activeCycle.startDate))
+    }
+
+    return 0
+  })
 
   useEffect(() => {
     const stateJSON = JSON.stringify(cyclesState)
 
     localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
-  })
-
-  const { cycles, activeCycleId } = cyclesState
-
-  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+  }, [cyclesState])
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds)
